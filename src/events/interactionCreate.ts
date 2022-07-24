@@ -1,8 +1,8 @@
-import { InteractionType } from "discord.js";
+import { Interaction, InteractionType } from "discord.js";
 
 module.exports = {
   once: false,
-  execute: (client: any, interaction: any) => {
+  execute: (client: any, interaction: Interaction) => {
     if (interaction.type != InteractionType.ApplicationCommand) return;
 
     try {

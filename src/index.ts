@@ -4,7 +4,15 @@ import { env } from "../environment";
 import { DiscordClient } from "./classes/discord";
 
 const client = new DiscordClient({
-  intents: [GatewayIntentBits.Guilds],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildMessageReactions,
+    GatewayIntentBits.GuildEmojisAndStickers,
+    GatewayIntentBits.GuildPresences,
+    GatewayIntentBits.GuildVoiceStates,
+    GatewayIntentBits.GuildMessageTyping,
+  ],
 });
 
 client.commands = new Collection();
@@ -12,6 +20,8 @@ client.commands = new Collection();
 const eventFiles = readdirSync("./src/events").filter(
   (file: any) => file.endsWith(".ts") || file.endsWith(".js")
 );
+
+client.login(env.DISCORD_API_KEY);
 
 for (const file of eventFiles) {
   const eventName = file.split(".")[0];
@@ -29,10 +39,8 @@ process.on("SIGINT", () => {
   process.exit(0);
 });
 
-client.login(env.DISCORD_API_KEY);
-
-client.on("ready", () => {
-  console.log(`Logged in as ${client.user.tag}!`);
+client.on("messageCreate", (message) => {
+  console.log(message);
 });
 
 module.exports = client;
