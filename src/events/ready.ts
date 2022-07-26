@@ -23,7 +23,8 @@ module.exports = {
 
     const commandData = commands.map((i) => i.data);
 
-    console.log(`Logged in as ${client.user.tag}!`);
-    return application.commands?.set(commandData);
+    application.commands?.set(commandData);
+
+    return console.log(`Logged in as ${client.user.tag}!`);
   },
 };

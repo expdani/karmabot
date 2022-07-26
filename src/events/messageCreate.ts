@@ -1,6 +1,8 @@
+import { setupKarmaReactions } from "../controllers/karma/reactions";
+
 module.exports = {
   once: false,
-  execute: () => {
-    console.log("asd");
+  execute: (client: any, message: any) => {
+      setupKarmaReactions(message);
   },
 };

@@ -7,6 +7,7 @@ const client = new DiscordClient({
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
     GatewayIntentBits.GuildMessageReactions,
     GatewayIntentBits.GuildEmojisAndStickers,
     GatewayIntentBits.GuildPresences,
@@ -37,10 +38,6 @@ for (const file of eventFiles) {
 process.on("SIGINT", () => {
   client.destroy();
   process.exit(0);
-});
-
-client.on("messageCreate", (message) => {
-  console.log(message);
 });
 
 module.exports = client;
